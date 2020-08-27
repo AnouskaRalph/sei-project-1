@@ -1,18 +1,14 @@
 function init() {
 
   const grid = document.querySelector('.grid')
-  console.log(grid)
-
-
-  //console.log('aliens', aliens)
+  console.log('grid', grid)
+ 
   
   //Grid 
   const cells = []
   const width = 10
   const cellCount = width * width
 
-  let alienCurrentPosition = 0
-  let gunCurrentPosition = 0 
 
 
   function createGrid() {
@@ -21,8 +17,9 @@ function init() {
       cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
-    }      
+    }    
   }
+ 
   createGrid()
 
 
@@ -33,7 +30,9 @@ function init() {
 
 
 
-  
+
+
+
 
 
 

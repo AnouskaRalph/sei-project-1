@@ -29,10 +29,18 @@ body {
 
 
 .grid div {
-  border: 1px solid yellow;
+  border: 1px solid purple;
   flex-grow: 1;
   height: 10%;
   width: 10%;
+}
+
+.grid div {
+  background-image: url('../assets/vampire.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
 
 
 
