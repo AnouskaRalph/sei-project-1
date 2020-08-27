@@ -8,6 +8,7 @@ function init() {
   const cells = []
   const width = 10
   const cellCount = width * width
+  let aliensPosition = 0
   
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
@@ -19,15 +20,17 @@ function init() {
   }
 createGrid()
 
-function placeAliens() {
-  console.log('ALIENS')
+//ADDING ALIENS 
+
+function addAliens(position) {
+  cells[position].classList.add('aliens')
 }
-placeAliens()
-  
+addAliens(position)
 
 
 
 
+aliens.forEach(alien => alien.addEventListener('window', placeAliens))
 
 
 
