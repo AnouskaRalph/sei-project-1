@@ -27,13 +27,12 @@ body {
   width: 600px;
 }
 
+
 .grid div {
-  border: 1px solid lightgrey;
+  border: 1px solid yellow;
   flex-grow: 1;
   height: 10%;
   width: 10%;
-}
-.aliens {
-  background-color: red;
-}
+
+
 
