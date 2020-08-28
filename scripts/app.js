@@ -8,9 +8,11 @@ function init() {
   const cellCount = width * width
   let gunPosition = 90
   let vampPosition = 0
+  const vamps = [11, 12, 13, 14, 15, 16, 17, 18]
 
-  const vamps = [11, 12, 13, 14, 15, 16, 17]
-  cells.forEach(vamp => cells[vampPosition + vamps].classList('vamp'))
+
+  
+  
 
   function addGun(position) {
     cells[position].classList.add('gun')
@@ -18,8 +20,11 @@ function init() {
   function removeGun(position) {
     cells[position].classList.remove('gun')
   } 
-  function addVamp(position) {
-    cells[position].classList.add('vamp')
+  function addVamp(vamp) {
+    // for each vamp
+    vamps.forEach((vamp, i) => {
+      cells[vamp].classList.add('vamp')
+    })
   } 
 
   
@@ -33,8 +38,7 @@ function init() {
     addGun(startingPosition)
     addVamp(vampPosition)  
   }
-  
- 
+
   
   function handleKeyUp(event) {
   

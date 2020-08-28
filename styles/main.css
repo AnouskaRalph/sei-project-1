@@ -47,6 +47,12 @@ body {
   background-size: contain;
   cursor: pointer;
 }
+.grid div.grave {
+  background-image: url('../assets/large_headstone.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
 
 
 
