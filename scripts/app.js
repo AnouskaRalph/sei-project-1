@@ -7,7 +7,7 @@ function init() {
   const width = 10
   const cellCount = width * width
   let gunPosition = 90
-  let vampPosition = 11
+  let vampPosition = [11]
 
   function addGun(position) {
     cells[position].classList.add('gun')
@@ -15,9 +15,11 @@ function init() {
   function removeGun(position) {
     cells[position].classList.remove('gun')
   } 
-  function addVamp(postion) {
+  function addVamp(position) {
     cells[position].classList.add('vamp')
-  }
+  } 
+
+  
 
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
@@ -25,14 +27,15 @@ function init() {
       cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
-    }  
-    addGun(startingPosition)  
+    }     
+    addGun(startingPosition)
+    addVamp(vampPosition)    
   }
  
   
   function handleKeyUp(event) {
   
-    removeGun(gunPosition) // * remove gun from the current position
+    removeGun(gunPosition) // remove gun from the current position
   
     const x = gunPosition % width // if gun / width has no remainder then dont move him left or right
       
@@ -44,14 +47,13 @@ function init() {
         if (x > 0) gunPosition--
         break
       default:
-        console.log('invalid key do nothing')
+        console.log('Something went wrong')
     }
   
     addGun(gunPosition) // add gun back at the new position
   }
   
-  
-  createGrid(gunPosition)
+  createGrid(gunPosition, vampPosition)
   
   // Event listeners
   //keyup - when lift up keydown - when press down it fires the event
