@@ -7,7 +7,10 @@ function init() {
   const width = 10
   const cellCount = width * width
   let gunPosition = 90
-  let vampPosition = [11]
+  let vampPosition = 0
+
+  const vamps = [11, 12, 13, 14, 15, 16, 17]
+  cells.forEach(vamp => cells[vampPosition + vamps].classList('vamp'))
 
   function addGun(position) {
     cells[position].classList.add('gun')
@@ -20,7 +23,6 @@ function init() {
   } 
 
   
-
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
@@ -29,8 +31,9 @@ function init() {
       cells.push(cell)
     }     
     addGun(startingPosition)
-    addVamp(vampPosition)    
+    addVamp(vampPosition)  
   }
+  
  
   
   function handleKeyUp(event) {
