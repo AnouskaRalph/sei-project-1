@@ -7,10 +7,24 @@
 body {
   height: 100vh;
   margin: 0;
+  text-align: center;
+}
+header {
+  display: flex;
+  justify-content: center;
+  border: 2px solid black;
+}
+h2 {
+  border: 3px solid red;
+}
+
+button {
+  border: 2px solid yellow;
+  margin: 20px;
 }
 
 .grid-wrapper {
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;

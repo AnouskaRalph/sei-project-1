@@ -1,17 +1,24 @@
 function init() {
 
   const grid = document.querySelector('.grid')
+  const startButton = document.querySelector('.button')
+  
   
   //Grid 
   const cells = []
   const width = 10
   const cellCount = width * width
-  let gunPosition = 90
-  let vampPosition = 0
-  const vamps = [11, 12, 13, 14, 15, 16, 17, 18]
-
+  const graves = [81, 83, 85, 87, 89]
+  const vamps = [
+    11, 12, 13, 14, 15, 16, 17, 18,
+    21, 22, 23, 24, 25, 26, 27, 28,
+    31, 32, 33, 34, 35, 36, 37, 38]
 
   
+  let gunPosition = 90
+  let vampPosition = 0
+  let gravePosition = 0
+    
   
 
   function addGun(position) {
@@ -21,11 +28,16 @@ function init() {
     cells[position].classList.remove('gun')
   } 
   function addVamp(vamp) {
-    // for each vamp
+    // for each vamps in the array, access each vamp, and do, cells add vamp and add this class vamp to it. 
     vamps.forEach((vamp, i) => {
       cells[vamp].classList.add('vamp')
     })
   } 
+  function addGrave(grave) {
+    graves.forEach((grave, i) => {
+      cells[grave].classList.add('grave')
+    })
+  }
 
   
   function createGrid(startingPosition) {
@@ -37,6 +49,7 @@ function init() {
     }     
     addGun(startingPosition)
     addVamp(vampPosition)  
+    addGrave(gravePosition)
   }
 
   
@@ -60,10 +73,17 @@ function init() {
     addGun(gunPosition) // add gun back at the new position
   }
   
-  createGrid(gunPosition, vampPosition)
+  function handleClick() {
   
-  // Event listeners
-  //keyup - when lift up keydown - when press down it fires the event
+  }
+  handleClick()
+
+
+
+  createGrid(gunPosition, vampPosition, gravePosition)
+  
+
+  startButton.addEventListener('click', handleClick)
   document.addEventListener('keyup', handleKeyUp)
 
 
