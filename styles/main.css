@@ -35,7 +35,13 @@ body {
   width: 10%;
 }
 
-.grid div {
+.grid div.gun {
+  background-image: url('../assets/gun1top.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+.grid div.vamp {
   background-image: url('../assets/vampire.png');
   background-repeat: no-repeat;
   background-size: contain;
