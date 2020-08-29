@@ -20,17 +20,18 @@ function init() {
   
 
 
-  function moveVamps(event) {
+  function moveVamps() {
     let count = 0 
     let timerId = setInterval(() => {
-      const a = vampPosition % width
-      switch(vampPosition) {
-        case vamps:
+      const a = vampPosition % width //
+      switch (vamps) {
+        case vampPosition:
           if (a < width -1) vampPosition++
           break
-          default: 
+        default: 
           console.log('NOOOOOPE')
       }
+      addVamp(vampPosition)
 
     }, 3000);
   }
