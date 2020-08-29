@@ -23,19 +23,15 @@ function init() {
   function moveVamps() {
     let count = 0 
     let timerId = setInterval(() => {
-      const a = vampPosition % width //
-      switch (vamps) {
-        case vampPosition:
-          if (a < width -1) vampPosition++
-          break
-        default: 
-          console.log('NOOOOOPE')
-      }
-      addVamp(vampPosition)
+    
+    vamps.forEach(vamp) => {
+    let result = vamps++ 
+    vampPosition = result
+    }
 
-    }, 3000);
+    }, 3000)
   }
-  
+  moveVamps()
 
   function addGun(position) {
     cells[position].classList.add('gun')
