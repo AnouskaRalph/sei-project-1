@@ -4,7 +4,6 @@ function init() {
   const startButton = document.querySelector('.button')
   
   
-  //Grid 
   const cells = []
   const width = 10
   const cellCount = width * width
@@ -18,7 +17,23 @@ function init() {
   let gunPosition = 90
   let vampPosition = 0
   let gravePosition = 0
-    
+  
+
+
+  function moveVamps(event) {
+    let count = 0 
+    let timerId = setInterval(() => {
+      const a = vampPosition % width
+      switch(vampPosition) {
+        case vamps:
+          if (a < width -1) vampPosition++
+          break
+          default: 
+          console.log('NOOOOOPE')
+      }
+
+    }, 3000);
+  }
   
 
   function addGun(position) {
@@ -73,17 +88,17 @@ function init() {
     addGun(gunPosition) // add gun back at the new position
   }
   
-  function handleClick() {
+  // function handleClick() {
   
-  }
-  handleClick()
+  // }
+  // handleClick()
 
 
 
   createGrid(gunPosition, vampPosition, gravePosition)
   
 
-  startButton.addEventListener('click', handleClick)
+  startButton.addEventListener('click', moveVamps)
   document.addEventListener('keyup', handleKeyUp)
 
 
