@@ -64,20 +64,19 @@ function init() {
       vamps = vamps.map(vamp => {
         return vamp + 1
       })
-      addVamps()     
+      addVamps()
+      vampsHitGrave(moveVamps)
     
     }, 1000)
   }
   
-  function vampsHitGrave() {
-    moveVamps()
-    if (cells.classList.contains('grave')) {
-      console.log('HITTTTT')
-    }  else {
-      console.log('DID NOT WORK')
-    }  vampsHitGrave()  
-  }
-
+  function vampsHitGrave(moveVamps) {
+   
+    event.target.classList.contains('grave', 'vamp')
+    console.log('HITTTTT')
+    
+  }   
+  
 
 
   function handleKeyUp(event) {
