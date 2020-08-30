@@ -9,9 +9,9 @@ function init() {
   const cellCount = width * width
   const graves = [81, 83, 85, 87, 89]
   let vamps = [
+    1, 2, 3, 4, 5, 6, 7, 8,
     11, 12, 13, 14, 15, 16, 17, 18,
-    21, 22, 23, 24, 25, 26, 27, 28,
-    31, 32, 33, 34, 35, 36, 37, 38]
+    21, 22, 23, 24, 25, 26, 27, 28]
 
   
   let gunPosition = 90
@@ -44,7 +44,6 @@ function init() {
     })
   }
 
-  
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
@@ -55,24 +54,29 @@ function init() {
     addGun(startingPosition)
     addVamps(vampPosition)  
     addGraves(gravePosition)
-  }
-
-  
+  }  
 
 
   function moveVamps() {
     let count = 0 
-    let timerId = setInterval(() => {
+    let moveVampsTimer = setInterval(() => {
       removeVamps()
       vamps = vamps.map(vamp => {
         return vamp + 1
       })
       addVamps()
-
+   
     }, 1000)
   }
+  function vampsHitGrave() {
+    moveVamps()
+    if (event.target.classList.contains('grave')) {
+      console.log('HIT MOTHER FUCKERS')
+    }   vampsHitGrave()
+  }
 
-  
+
+
   function handleKeyUp(event) {
   
     removeGun(gunPosition) // remove gun from the current position

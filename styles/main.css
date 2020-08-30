@@ -13,10 +13,13 @@ body {
 header {
   display: flex;
   justify-content: center;
-  
+  margin: 10px;
+  flex-direction: row;
+  justify-content: space-around;
+    
 }
 h2 {
-  border: 3px solid red;
+
   color: white;
 }
 h1 {
@@ -41,7 +44,7 @@ button {
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
-  height: 600px;
+  height: 500px;
   width: 600px;
 }
 
