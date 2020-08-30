@@ -57,23 +57,23 @@ function init() {
   }  
 
 
-  function moveVamps() {
+  function moveVamps(event) {
     let count = 0 
     let moveVampsTimer = setInterval(() => {
       removeVamps()
       vamps = vamps.map(vamp => {
         return vamp + 1
-      })
+      }) 
       addVamps()
-   
+      if (event.target.classList.contains('grave')) {
+        console.log('HITTTTT')
+      }     
     }, 1000)
   }
-  function vampsHitGrave() {
-    moveVamps()
-    if (event.target.classList.contains('grave')) {
-      console.log('HIT MOTHER FUCKERS')
-    }   vampsHitGrave()
-  }
+  // function vampsHitGrave(event) {
+  //   moveVamps()
+  
+  // }
 
 
 
@@ -97,8 +97,6 @@ function init() {
     addGun(gunPosition) // add gun back at the new position
   }
   
-
-
 
 
   createGrid(gunPosition, vampPosition, gravePosition)
