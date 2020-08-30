@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
 }
 
 body {
@@ -16,6 +17,7 @@ header {
   margin: 10px;
   flex-direction: row;
   justify-content: space-around;
+  
     
 }
 h2 {
@@ -27,8 +29,11 @@ h1 {
 }
 
 button {
-  border: 2px solid yellow;
+
   margin: 20px;
+  color: #33f293;
+  background-color: black;
+
 }
 
 .grid-wrapper {
@@ -50,7 +55,7 @@ button {
 
 
 .grid div {
-  border: 1px solid purple;
+  
   flex-grow: 1;
   height: 10%;
   width: 10%;

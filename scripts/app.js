@@ -27,9 +27,11 @@ function init() {
     cells[position].classList.remove('gun')
   } 
   function addVamps(vamp) {
-    // for each vamps in the array, access each vamp, and do, cells add vamp and add this class vamp to it. 
     vamps.forEach((vamp, i) => {
-      cells[vamp].classList.add('vamp')
+      if (cells.classList.contains('grave')) {
+        console.log('it has grave')
+      } else
+        cells[vamp].classList.add('vamp')
     })
   } 
   function removeVamps(vamp) {
@@ -64,19 +66,19 @@ function init() {
       vamps = vamps.map(vamp => {
         return vamp + 1
       })
-      addVamps()
-      vampsHitGrave(moveVamps)
-    
+      addVamps()  
     }, 1000)
   }
-  
-  function vampsHitGrave(moveVamps) {
-   
-    event.target.classList.contains('grave', 'vamp')
-    console.log('HITTTTT')
-    
-  }   
-  
+
+  // function vampsHitGraves(event) {
+  //   event.target.classList.contains('grave')
+  //   console.log(event.target)
+        
+  // }
+  // vampsHitGraves()
+
+
+
 
 
   function handleKeyUp(event) {
@@ -95,8 +97,7 @@ function init() {
       default:
         console.log('Something went wrong')
     }
-  
-    addGun(gunPosition) // add gun back at the new position
+    addGun(gunPosition) 
   }
   
 
@@ -105,6 +106,7 @@ function init() {
   
 
   startButton.addEventListener('click', moveVamps)
+  // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
 
 
