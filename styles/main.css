@@ -8,14 +8,19 @@ body {
   height: 100vh;
   margin: 0;
   text-align: center;
+  background: black;
 }
 header {
   display: flex;
   justify-content: center;
-  border: 2px solid black;
+  
 }
 h2 {
   border: 3px solid red;
+  color: white;
+}
+h1 {
+  color: white;
 }
 
 button {
@@ -31,8 +36,7 @@ button {
 }
 
 .grid {
-  align-items: center;
- 
+  align-items: center; 
   display: flex;
   flex-wrap: wrap;
   height: 100%;
