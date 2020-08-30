@@ -63,17 +63,20 @@ function init() {
       removeVamps()
       vamps = vamps.map(vamp => {
         return vamp + 1
-      }) 
-      addVamps()
-      if (event.target.classList.contains('grave')) {
-        console.log('HITTTTT')
-      }     
+      })
+      addVamps()     
+    
     }, 1000)
   }
-  // function vampsHitGrave(event) {
-  //   moveVamps()
   
-  // }
+  function vampsHitGrave() {
+    moveVamps()
+    if (cells.classList.contains('grave')) {
+      console.log('HITTTTT')
+    }  else {
+      console.log('DID NOT WORK')
+    }  vampsHitGrave()  
+  }
 
 
 
