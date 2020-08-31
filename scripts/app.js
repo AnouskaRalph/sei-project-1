@@ -16,11 +16,13 @@ function init() {
     11, 12, 13, 14, 15, 16, 17, 18,
     21, 22, 23, 24, 25, 26, 27, 28]  
   let gunPosition = 90
-  let vampPosition = 0
-  let gravePosition = 0
-  let moveVampsTimer
+  let vampPosition
+  let gravePosition
   let swordPosition = 0
-  let sword = 0 
+  let moveVampsTimer
+  let moveSwordTimer
+
+
   
 
 
@@ -30,16 +32,16 @@ function init() {
   function removeGun(position) {
     cells[position].classList.remove('gun')
   } 
-  
+
   function addSword(sword) {
     if (cells[sword].classList.contains('grave')) {
-      endGame()
+      console.log('YOU HIT GRAVE')
     } else  
       cells[sword].classList.add('sword')
   }
 
-  function removeSword(position) {
-    cells[position].classList.remove('sword')
+  function removeSword(sword) {
+    cells[sword].classList.remove('sword')
   } 
   
 
@@ -74,7 +76,6 @@ function init() {
     addGun(startingPosition)
     addVamps(vampPosition)  
     addGraves(gravePosition)
-    addSword(swordPosition)
   }  
 
 
@@ -85,21 +86,27 @@ function init() {
         return vamp + 1
       })
       addVamps()       
-    }, 500)
+    }, 200)
+  }
+  
+  function moveSword(event) {
+    moveSwordTimer = setInterval(() => {
+      swordPosition = [gunPosition - 10] 
+      return swordPosition 
+    }, 3000)
   }
 
   function endGame() {
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
-    return removeVamps()  
+    removeVamps()   
   }
-
-
 
   function handleKeyUp(event) {
   
     removeGun(gunPosition) // remove gun from the current position
-  
+    removeSword(swordPosition)
+      
     const x = gunPosition % width // if gun / width has no remainder then dont move him left or right
       
     switch (event.keyCode) { 
@@ -108,11 +115,15 @@ function init() {
         break
       case 37: //arrow left
         if (x > 0) gunPosition--
-        break     
+        break   
+      case 32: //space
+        moveSword()
+        break  
       default:
         console.log('Something went wrong')
     }
     addGun(gunPosition) 
+   
   }
 
 
