@@ -73,9 +73,10 @@ function init() {
   }
 
   function endGame() {
-    clearInterval(moveVampsTimer) 
-    return removeVamps()
-  
+    clearInterval(moveVampsTimer)
+    gameOver.innerHTML = 'Game Over'
+    return removeVamps()  
+    
   }
 
 
