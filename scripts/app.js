@@ -68,15 +68,16 @@ function init() {
       vamps = vamps.map(vamp => {
         return vamp + 1
       })
-      addVamps()  
-      
-    }, 1000)
+      addVamps()       
+    }, 500)
   }
+
   function endGame() {
-    clearInterval(moveVampsTimer)
-    removeVamps()
+    clearInterval(moveVampsTimer) 
+    return removeVamps()
+  
   }
- 
+
 
 
   function handleKeyUp(event) {
