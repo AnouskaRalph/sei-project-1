@@ -28,12 +28,13 @@ function init() {
   } 
   function addVamps(vamp) {
     vamps.forEach((vamp, i) => {
-      if (cells.classList.contains('grave')) {
-        console.log('it has grave')
+      if (cells[vamp].classList.contains('grave')) {
+        console.log(vamps)
       } else
-        cells[vamp].classList.add('vamp')
+        cells[vamp].classList.add('vamp')    
     })
   } 
+
   function removeVamps(vamp) {
     vamps.forEach((vamp, i) => {
       cells[vamp].classList.remove('vamp')

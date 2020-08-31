@@ -9,7 +9,8 @@ body {
   height: 100vh;
   margin: 0;
   text-align: center;
-  background: black;
+  background-color: black;
+
 }
 header {
   display: flex;
@@ -51,6 +52,7 @@ button {
   justify-content: center;
   height: 500px;
   width: 600px;
+  
 }
 
 
