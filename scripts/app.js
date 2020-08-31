@@ -19,11 +19,15 @@ function init() {
   let vampPosition = 0
   let gravePosition = 0
   let moveVampsTimer
+  let swordPosition
   
 
 
   function addGun(position) {
     cells[position].classList.add('gun')
+  }
+  function addSword(position) {
+    cells[position].classList.add('sword')
   }
   function removeGun(position) {
     cells[position].classList.remove('gun')
@@ -76,7 +80,6 @@ function init() {
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
     return removeVamps()  
-    
   }
 
 
@@ -98,6 +101,10 @@ function init() {
         console.log('Something went wrong')
     }
     addGun(gunPosition) 
+  }
+
+  function handleSpaceBar() {
+
   }
   
 

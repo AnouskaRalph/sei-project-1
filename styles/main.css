@@ -80,6 +80,12 @@ button {
   background-size: contain;
   cursor: pointer;
 }
+.grid div.sword {
+  background-image: url('../assets/espada_foda.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
 
 #game-over {
   color: aliceblue;
