@@ -9,17 +9,18 @@ function init() {
   const width = 10
   const cellCount = width * width
   const graves = [81, 83, 85, 87, 89]
+  
+  
   let vamps = [
     1, 2, 3, 4, 5, 6, 7, 8,
     11, 12, 13, 14, 15, 16, 17, 18,
-    21, 22, 23, 24, 25, 26, 27, 28]
-
-  
+    21, 22, 23, 24, 25, 26, 27, 28]  
   let gunPosition = 90
   let vampPosition = 0
   let gravePosition = 0
   let moveVampsTimer
-  let swordPosition
+  let swordPosition = 0
+  let sword = 0
   
 
 
@@ -29,6 +30,10 @@ function init() {
   function addSword(position) {
     cells[position].classList.add('sword')
   }
+  function removeSword(position) {
+    cells[position].classList.remove('sword')
+  } 
+  
   function removeGun(position) {
     cells[position].classList.remove('gun')
   } 
@@ -96,16 +101,20 @@ function init() {
         break
       case 37: //arrow left
         if (x > 0) gunPosition--
-        break
+        break     
       default:
         console.log('Something went wrong')
     }
     addGun(gunPosition) 
   }
 
-  function handleSpaceBar() {
-
+  function swordFlying() {
+console.log('FLY BABYS')
   }
+
+swordFlying()
+
+
   
 
 
@@ -115,6 +124,8 @@ function init() {
   startButton.addEventListener('click', moveVamps)
   // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
+
+
 
 
 
