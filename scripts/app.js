@@ -20,23 +20,29 @@ function init() {
   let gravePosition = 0
   let moveVampsTimer
   let swordPosition = 0
-  let sword = 0
+  let sword = 0 
   
 
 
   function addGun(position) {
     cells[position].classList.add('gun')
   }
-  function addSword(position) {
-    cells[position].classList.add('sword')
+  function removeGun(position) {
+    cells[position].classList.remove('gun')
+  } 
+  
+  function addSword(sword) {
+    if (cells[sword].classList.contains('grave')) {
+      endGame()
+    } else  
+      cells[sword].classList.add('sword')
   }
+
   function removeSword(position) {
     cells[position].classList.remove('sword')
   } 
   
-  function removeGun(position) {
-    cells[position].classList.remove('gun')
-  } 
+
   function addVamps(vamp) {
     vamps.forEach((vamp, i) => {
       if (cells[vamp].classList.contains('grave')) {
@@ -68,6 +74,7 @@ function init() {
     addGun(startingPosition)
     addVamps(vampPosition)  
     addGraves(gravePosition)
+    addSword(swordPosition)
   }  
 
 
@@ -108,11 +115,7 @@ function init() {
     addGun(gunPosition) 
   }
 
-  function swordFlying() {
-console.log('FLY BABYS')
-  }
 
-swordFlying()
 
 
   
