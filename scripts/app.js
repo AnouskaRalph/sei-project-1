@@ -2,6 +2,7 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const startButton = document.querySelector('.button')
+  const gameOver = document.querySelector('#game-over')
   
   
   const cells = []
@@ -17,6 +18,7 @@ function init() {
   let gunPosition = 90
   let vampPosition = 0
   let gravePosition = 0
+  let moveVampsTimer
   
 
 
@@ -29,7 +31,7 @@ function init() {
   function addVamps(vamp) {
     vamps.forEach((vamp, i) => {
       if (cells[vamp].classList.contains('grave')) {
-        console.log(vamps)
+        endGame()
       } else
         cells[vamp].classList.add('vamp')    
     })
@@ -60,26 +62,21 @@ function init() {
   }  
 
 
-  function moveVamps(event) {
-    let count = 0 
-    let moveVampsTimer = setInterval(() => {
+  function moveVamps(event) {    
+    moveVampsTimer = setInterval(() => {
       removeVamps()
       vamps = vamps.map(vamp => {
         return vamp + 1
       })
       addVamps()  
+      
     }, 1000)
   }
-
-  // function vampsHitGraves(event) {
-  //   event.target.classList.contains('grave')
-  //   console.log(event.target)
-        
-  // }
-  // vampsHitGraves()
-
-
-
+  function endGame() {
+    clearInterval(moveVampsTimer)
+    removeVamps()
+  }
+ 
 
 
   function handleKeyUp(event) {

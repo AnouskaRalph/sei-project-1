@@ -55,7 +55,6 @@ button {
   
 }
 
-
 .grid div {
   
   flex-grow: 1;
@@ -80,6 +79,10 @@ button {
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+#game-over {
+  color: aliceblue;
 }
 
 
