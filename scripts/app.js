@@ -91,9 +91,12 @@ function init() {
   
   function moveSword(event) {
     moveSwordTimer = setInterval(() => {
-      swordPosition = [gunPosition - 10] 
-      return swordPosition 
-    }, 3000)
+      swordPosition = [gunPosition - 10]
+      swordPosition = [swordPosition - 10]
+      addSword(swordPosition)
+
+      console.log(swordPosition)
+    }, 1000)
   }
 
   function endGame() {
@@ -117,7 +120,7 @@ function init() {
         if (x > 0) gunPosition--
         break   
       case 32: //space
-        moveSword()
+        moveSword() 
         break  
       default:
         console.log('Something went wrong')
