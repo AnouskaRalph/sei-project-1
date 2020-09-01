@@ -39,13 +39,19 @@ function init() {
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
-      RemoveOneVamp()
+      // cells[vampPosition].classList.remove('vamp')
+      // removeVamps[vamp, i]
       
+            
     } else {
       cells[swordPosition].classList.add('sword')
     }
   }
-
+function removeOne() {
+vamps.pop()
+}
+removeOne()
+console.log(vamps[2])
 
   function removeSword() {
     cells[swordPosition].classList.remove('sword')
@@ -65,9 +71,9 @@ function init() {
       cells[vamp].classList.remove('vamp')
     })
   } 
-  function RemoveOneVamp() {
-    cells[vampPosition].classList.remove('vamp')
-  }
+  // function RemoveOneVamp() {
+  //   cells[vampPosition].classList.remove('vamp')
+  // }
 
   function addGraves() {
     graves.forEach((grave) => {
