@@ -10,10 +10,9 @@ function init() {
   const graves = [81, 83, 85, 87, 89]
 
 
-  let vamps = [
-    1, 2, 3, 4, 5, 6, 7, 8,
+  let vamps = [ 1, 2, 3, 4, 5, 6, 7, 8, 
     11, 12, 13, 14, 15, 16, 17, 18,
-    21, 22, 23, 24, 25, 26, 27, 28]  
+  21, 22, 23, 24, 25, 26, 27, 28, 28]  
   let gunPosition = 90
   let vampPosition
   let gravePosition
@@ -39,19 +38,16 @@ function init() {
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
-      // cells[vampPosition].classList.remove('vamp')
+      cells[swordPosition].classList.remove('vamp')
       // removeVamps[vamp, i]
-      
+      // console.log(vampPosition)
+      console.log(cells[swordPosition])
             
     } else {
       cells[swordPosition].classList.add('sword')
     }
   }
-function removeOne() {
-vamps.pop()
-}
-removeOne()
-console.log(vamps[2])
+
 
   function removeSword() {
     cells[swordPosition].classList.remove('sword')
