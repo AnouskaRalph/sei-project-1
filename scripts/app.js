@@ -81,12 +81,20 @@ function init() {
   }
 
   function addHearts() {
-    cells[heartPosition].classList.add('heart')
-    heartPosition = Math.floor(Math.random() * vamps.length)
+    
+    const heartNew = vamps[(Math.floor(Math.random() * vamps.length))]
+    
+   
+    //heartPosition = vamps[Math.floor(Math.random() * vamps.length)]
+    //heartPosition = Math.floor(Math.random() * vamps.length)
+    cells[heartNew].classList.add('heart')
+  
+    console.log(heartNew)
   
   }
+  
  
-console.log(heartPosition)
+
 
   function removeHearts() {
     cells[heartPosition].classList.remove('heart')
