@@ -17,6 +17,7 @@ function init() {
   let vampPosition
   let gravePosition
   let swordPosition
+  let heartPosition 
   let moveVampsTimer
   let moveSwordTimer
 
@@ -38,10 +39,10 @@ function init() {
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
-      console.log(vamps.length)
+      //console.log(vamps.length)
       vamps.splice(vamps.indexOf(swordPosition), 1)
       cells[swordPosition].classList.remove('vamp')
-      console.log(vamps)
+      //console.log(vamps)
     } else {
       cells[swordPosition].classList.add('sword')
     }
@@ -73,6 +74,24 @@ function init() {
       cells[grave].classList.add('grave')
     })
   }
+  function removeGraves() {
+    graves.forEach((grave) => {
+      cells[grave].classList.remove('grave')
+    })
+  }
+
+  function addHearts() {
+    cells[heartPosition].classList.add('heart')
+    heartPosition = Math.floor(Math.random() * vamps.length)
+  
+  }
+ 
+console.log(heartPosition)
+
+  function removeHearts() {
+    cells[heartPosition].classList.remove('heart')
+  }
+  
 
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
@@ -83,6 +102,7 @@ function init() {
     addGun(startingPosition)
     addVamps(vampPosition)  
     addGraves(gravePosition)
+    addHearts(heartPosition)
   }  
 
   function moveVamps() {    
@@ -104,6 +124,13 @@ function init() {
       addSword()      
     }, 100)
   }
+  
+  // function moveHeart() {
+  //   // heartPosition = Math.floor(Math.random() * vamps.length)
+  //   moveHeartTimer = setInterval(() => {
+  //   console.log(heartPosition)
+  //   }, 1000)
+  // }
 
   function endGame() {
     removeVamps() 

@@ -86,6 +86,12 @@ button {
   background-size: contain;
   cursor: pointer;
 }
+.grid div.heart {
+  background-image: url('../assets/sprite_0.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
 
 #game-over {
   color: aliceblue;
