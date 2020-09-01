@@ -124,7 +124,7 @@ function init() {
         return vamp + 1
       })
       addVamps()
-    }, 1000)
+    }, 200)
   }
   
   function moveSword() {
@@ -160,7 +160,13 @@ function init() {
     removeVamps() 
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
+    if (cells[vamp].classList.contains('grave')) {
+      console.log('Comp Won')
+    } else {
+      console.log('player won')
+    }
   }
+
   
   function handleKeyUp(event) {
     removeGun() 
