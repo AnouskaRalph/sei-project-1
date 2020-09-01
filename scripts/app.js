@@ -1,16 +1,15 @@
 function init() {
 
+
   const grid = document.querySelector('.grid')
   const startButton = document.querySelector('.button')
   const gameOver = document.querySelector('#game-over')
-  
-  
   const cells = []
   const width = 10
   const cellCount = width * width
   const graves = [81, 83, 85, 87, 89]
-  
-  
+
+
   let vamps = [
     1, 2, 3, 4, 5, 6, 7, 8,
     11, 12, 13, 14, 15, 16, 17, 18,
@@ -18,35 +17,35 @@ function init() {
   let gunPosition = 90
   let vampPosition
   let gravePosition
-  let swordPosition = 0
+  let swordPosition
   let moveVampsTimer
   let moveSwordTimer
 
-
-  
 
 
   function addGun(position) {
     cells[position].classList.add('gun')
   }
-  function removeGun(position) {
-    cells[position].classList.remove('gun')
+  
+  function removeGun() {
+    cells[gunPosition].classList.remove('gun')
   } 
 
-  function addSword(sword) {
-    if (cells[sword].classList.contains('grave')) {
+  function addSword() {
+    if (cells[swordPosition].classList.contains('grave')) {
       console.log('YOU HIT GRAVE')
-    } else  
-      cells[sword].classList.add('sword')
+    } else {
+      cells[swordPosition].classList.add('sword')
+    }
   }
 
-  function removeSword(sword) {
-    cells[sword].classList.remove('sword')
-  } 
-  
 
-  function addVamps(vamp) {
-    vamps.forEach((vamp, i) => {
+  function removeSword() {
+    cells[swordPosition].classList.remove('sword')
+  } 
+
+  function addVamps() {
+    vamps.forEach((vamp) => {
       if (cells[vamp].classList.contains('grave')) {
         endGame()
       } else
@@ -54,14 +53,14 @@ function init() {
     })
   } 
 
-  function removeVamps(vamp) {
-    vamps.forEach((vamp, i) => {
+  function removeVamps() {
+    vamps.forEach((vamp) => {
       cells[vamp].classList.remove('vamp')
     })
   } 
 
-  function addGraves(grave) {
-    graves.forEach((grave, i) => {
+  function addGraves() {
+    graves.forEach((grave) => {
       cells[grave].classList.add('grave')
     })
   }
@@ -78,8 +77,7 @@ function init() {
     addGraves(gravePosition)
   }  
 
-
-  function moveVamps(event) {    
+  function moveVamps() {    
     moveVampsTimer = setInterval(() => {
       removeVamps()
       vamps = vamps.map(vamp => {
@@ -88,15 +86,18 @@ function init() {
       addVamps()       
     }, 200)
   }
-  
-  function moveSword(event) {
-    moveSwordTimer = setInterval(() => {
-      swordPosition = [gunPosition - 10]
-      swordPosition = [swordPosition - 10]
-      addSword(swordPosition)
 
-      console.log(swordPosition)
-    }, 1000)
+
+  function moveSword() {
+    swordPosition = gunPosition
+    moveSwordTimer = setInterval(() => {
+      removeSword()
+      swordPosition = swordPosition - 10
+      console.log('swordPosition', swordPosition)
+      console.log('gunPosition', gunPosition)
+      addSword()
+      
+    }, 100)
   }
 
   function endGame() {
@@ -106,12 +107,9 @@ function init() {
   }
 
   function handleKeyUp(event) {
-  
-    removeGun(gunPosition) // remove gun from the current position
-    removeSword(swordPosition)
-      
+    removeGun() // remove gun from the current position
+    // removeSword()
     const x = gunPosition % width // if gun / width has no remainder then dont move him left or right
-      
     switch (event.keyCode) { 
       case 39: //arrow right
         if (x < width - 1) gunPosition++
@@ -126,21 +124,19 @@ function init() {
         console.log('Something went wrong')
     }
     addGun(gunPosition) 
-   
   }
 
 
 
 
-  
-
-
   createGrid(gunPosition, vampPosition, gravePosition)
-  
-
   startButton.addEventListener('click', moveVamps)
   // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
+
+
+
+
 
 
 
