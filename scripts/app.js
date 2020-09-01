@@ -39,7 +39,8 @@ function init() {
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
-      removeVamps()
+      RemoveOneVamp()
+      
     } else {
       cells[swordPosition].classList.add('sword')
     }
@@ -64,6 +65,9 @@ function init() {
       cells[vamp].classList.remove('vamp')
     })
   } 
+  function RemoveOneVamp() {
+    cells[vampPosition].classList.remove('vamp')
+  }
 
   function addGraves() {
     graves.forEach((grave) => {
@@ -74,7 +78,6 @@ function init() {
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
-      cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
     }     
