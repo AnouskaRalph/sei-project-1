@@ -33,7 +33,13 @@ function init() {
 
   function addSword() {
     if (cells[swordPosition].classList.contains('grave')) {
-      console.log('YOU HIT GRAVE')
+      clearInterval(moveSwordTimer)
+      removeSword()
+      console.log('HIT GRAVE')
+    } else if (cells[swordPosition].classList.contains('vamp')) {
+      clearInterval(moveSwordTimer)
+      removeSword()
+      removeVamps()
     } else {
       cells[swordPosition].classList.add('sword')
     }
@@ -93,17 +99,14 @@ function init() {
     moveSwordTimer = setInterval(() => {
       removeSword()
       swordPosition = swordPosition - 10
-      console.log('swordPosition', swordPosition)
-      console.log('gunPosition', gunPosition)
-      addSword()
-      
+      addSword()      
     }, 100)
   }
 
   function endGame() {
+    removeVamps() 
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
-    removeVamps()   
   }
 
   function handleKeyUp(event) {
