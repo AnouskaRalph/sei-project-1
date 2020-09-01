@@ -7,12 +7,12 @@ function init() {
   const cells = []
   const width = 10
   const cellCount = width * width
-  const graves = [81, 83, 85, 87, 89]
+  const graves = [81, 83, 85, 87]
 
 
   let vamps = [ 1, 2, 3, 4, 5, 6, 7, 8, 
     11, 12, 13, 14, 15, 16, 17, 18,
-  21, 22, 23, 24, 25, 26, 27, 28, 28]  
+    21, 22, 23, 24, 25, 26, 27, 28, 28]  
   let gunPosition = 90
   let vampPosition
   let gravePosition
@@ -38,11 +38,10 @@ function init() {
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
+      console.log(vamps.length)
+      vamps.splice(vamps.indexOf(swordPosition), 1)
       cells[swordPosition].classList.remove('vamp')
-      // removeVamps[vamp, i]
-      // console.log(vampPosition)
-      console.log(cells[swordPosition])
-            
+      console.log(vamps)
     } else {
       cells[swordPosition].classList.add('sword')
     }
@@ -67,9 +66,7 @@ function init() {
       cells[vamp].classList.remove('vamp')
     })
   } 
-  // function RemoveOneVamp() {
-  //   cells[vampPosition].classList.remove('vamp')
-  // }
+
 
   function addGraves() {
     graves.forEach((grave) => {
@@ -95,7 +92,7 @@ function init() {
         return vamp + 1
       })
       addVamps()       
-    }, 200)
+    }, 1000)
   }
 
 
@@ -112,6 +109,7 @@ function init() {
     removeVamps() 
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
+
   }
 
   function handleKeyUp(event) {
