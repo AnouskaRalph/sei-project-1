@@ -17,9 +17,11 @@ function init() {
   let vampPosition
   let gravePosition
   let swordPosition
-  let heartPosition 
+  let heartPosition
+  let newHeartPosition
   let moveVampsTimer
   let moveSwordTimer
+  let moveHeartTimer
 
 
 
@@ -80,22 +82,13 @@ function init() {
     })
   }
 
-  function addHearts() {
-    
-    const heartNew = vamps[(Math.floor(Math.random() * vamps.length))]
-    
-   
-    //heartPosition = vamps[Math.floor(Math.random() * vamps.length)]
-    //heartPosition = Math.floor(Math.random() * vamps.length)
-    cells[heartNew].classList.add('heart')
+  function addHearts() {    
+    // const newHeartPosition = vamps[(Math.floor(Math.random() * vamps.length))]
+    // cells[newHeartPosition].classList.add('heart')
+    // console.log(newHeartPosition) 
+    console.log('WORKINGGGGG')
+  } 
   
-    console.log(heartNew)
-  
-  }
-  
- 
-
-
   function removeHearts() {
     cells[heartPosition].classList.remove('heart')
   }
@@ -110,7 +103,7 @@ function init() {
     addGun(startingPosition)
     addVamps(vampPosition)  
     addGraves(gravePosition)
-    addHearts(heartPosition)
+    
   }  
 
   function moveVamps() {    
@@ -133,12 +126,14 @@ function init() {
     }, 100)
   }
   
-  // function moveHeart() {
-  //   // heartPosition = Math.floor(Math.random() * vamps.length)
-  //   moveHeartTimer = setInterval(() => {
-  //   console.log(heartPosition)
-  //   }, 1000)
-  // }
+  function moveHeart() {
+    heartPosition = newHeartPosition
+    moveHeartTimer = setInterval(() => {
+      removeHearts()
+      heartPosition = newHeartPosition - 10 
+      addHearts()
+    }, 1000)
+  }
 
   function endGame() {
     removeVamps() 
@@ -148,11 +143,10 @@ function init() {
   }
 
   function handleKeyUp(event) {
-    removeGun() // remove gun from the current position
-    // removeSword()
+    removeGun() 
     const x = gunPosition % width // if gun / width has no remainder then dont move him left or right
     switch (event.keyCode) { 
-      case 39: //arrow right
+      case 39: 
         if (x < width - 1) gunPosition++
         break
       case 37: //arrow left
@@ -171,7 +165,7 @@ function init() {
 
 
   createGrid(gunPosition, vampPosition, gravePosition)
-  startButton.addEventListener('click', moveVamps)
+  startButton.addEventListener('click', moveVamps, moveHeart)
   // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
 
