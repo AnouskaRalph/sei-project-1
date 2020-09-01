@@ -43,6 +43,7 @@ function init() {
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
+      scoreKeeping()
       //console.log(vamps.length)
       vamps.splice(vamps.indexOf(swordPosition), 1)
       cells[swordPosition].classList.remove('vamp')
@@ -144,12 +145,15 @@ function init() {
       removeHearts()
       heartPosition = heartPosition + 10 
       addHearts()
-      console.log('WORKING EVERY 1SECOND')
+      //console.log('WORKING EVERY 1SECOND')
     }, 1000)
   } 
 
   function scoreKeeping() {
-
+    if (cells[swordPosition].classList.contains('vamp')) {
+      score += 10 
+    }
+    scoreDisplay.textContent = score
   }
   
   function endGame() {
