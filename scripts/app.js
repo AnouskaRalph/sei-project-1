@@ -11,7 +11,6 @@ function init() {
   const width = 10
   const cellCount = width * width
   const graves = [81, 83, 85, 87]
-
   
   let vamps = [ 1, 2, 3, 4, 5, 6, 7, 8, 
     11, 12, 13, 14, 15, 16, 17, 18,
@@ -142,7 +141,7 @@ function init() {
         swordPosition = swordPosition - 10
         addSword()   
       }         
-    }, 1000)
+    }, 200)
   }
   
   function getNewHeartPosition() {
@@ -151,9 +150,12 @@ function init() {
   function moveHeart() {
     heartPosition = getNewHeartPosition()
     moveHeartTimer = setInterval(() => {
-      removeHearts()
-      heartPosition = heartPosition + 10 
-      addHearts()
+      if (heartPosition <= 99) {
+        removeHearts()
+        heartPosition = heartPosition + 10 
+        addHearts() 
+      }
+      
       //console.log('WORKING EVERY 1SECOND')
     }, 200)
   } 
