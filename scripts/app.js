@@ -41,9 +41,10 @@ function init() {
     if (cells[heartPosition].classList.contains('gun')) {
       lives -= 1
       livesDisplay.textContent = lives 
+    } if (lives === 0) {
+      endame()
     }       
-  }  
-  
+  }   
   
   function addSword() {
     if (cells[swordPosition].classList.contains('grave')) {
@@ -128,7 +129,7 @@ function init() {
   }  
   
   function moveVamps() { 
-    moveHeart()
+    
     clearInterval(moveVampsTimer)
     moveVampsTimer = setInterval(() => {
       removeVamps()
@@ -136,6 +137,7 @@ function init() {
         return vamp + 1
       })
       addVamps()
+      heartTimer = setInterval(moveHearts, 2000)
     }, 500)
   }
   
@@ -151,22 +153,51 @@ function init() {
     }, 200)
   }
   
+
+
+
+
+
+
+  // function getNewHeartPosition() {
+  //   return Math.floor(Math.random() * vamps.length)
+  // }
+  // function moveHeart() {
+  //   clearInterval(moveHeartTimer)
+  //   heartPosition = getNewHeartPosition()    
+  //   moveHeartTimer = setInterval(() => {
+  //     if (heartPosition <= 99) {
+  //       removeHearts()
+  //       heartPosition = heartPosition + 10 
+  //       addHearts() 
+  //     }  else {
+  //       cells[heartPosition].classList.remove('heart') 
+  //     }    
+  //   }, 300)
+  // } 
+
   function getNewHeartPosition() {
     return Math.floor(Math.random() * vamps.length)
   }
   function moveHeart() {
     clearInterval(moveHeartTimer)
-    heartPosition = getNewHeartPosition()    
-    moveHeartTimer = setInterval(() => {
-      if (heartPosition <= 99) {
-        removeHearts()
-        heartPosition = heartPosition + 10 
-        addHearts() 
-      }  else {
-        cells[heartPosition].classList.remove('heart') 
-      }    
-    }, 300)
+    heartPosition = getNewHeartPosition()       
+    if (heartPosition <= 99) {
+      removeHearts()
+      heartPosition = heartPosition + 10 
+      addHearts() 
+    }  else {
+      cells[heartPosition].classList.remove('heart') 
+    }      
   } 
+
+
+
+
+
+
+
+
 
   function scoreKeeping() {
     if (cells[swordPosition].classList.contains('vamp')) {
