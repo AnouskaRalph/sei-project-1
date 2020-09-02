@@ -4,6 +4,8 @@ function init() {
   const startButton = document.querySelector('.button')
   const gameOver = document.querySelector('#game-over')
   const scoreDisplay = document.querySelector('#score-display')
+  const displayWhoWon = document.querySelector('#who-won')
+  
   
   const cells = []
   const width = 10
@@ -38,14 +40,13 @@ function init() {
   function addSword() {
     if (cells[swordPosition].classList.contains('grave')) {
       clearInterval(moveSwordTimer)
-      removeSword()
-      whoWon()
+      removeSword()      
       console.log('HIT GRAVE')
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
       scoreKeeping()
-      whoWon()
+      
       //console.log(vamps.length)
       vamps.splice(vamps.indexOf(swordPosition), 1)
       cells[swordPosition].classList.remove('vamp')
@@ -58,7 +59,6 @@ function init() {
   function removeSword() {
     cells[swordPosition].classList.remove('sword')
   } 
-  
   function addVamps() {
     vamps.forEach((vamp) => {
       if (cells[vamp].classList.contains('grave')) {
@@ -162,38 +162,24 @@ function init() {
     }
     scoreDisplay.textContent = score
   }
-
+ 
   function endGame() {
     removeVamps() 
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
   }
 
-  // function whoWon() {
-  //   if (cells[vamps].classList.contains('grave')) {
-  //     console.log('Comp Won VAMPS HIT GRAVES')
-  //     console.log(vamps)
-  //   // // else if (vamps.length < 1) {
-  //   // //   console.log('PLAYER won ALL VAMPS GONE')
-  //   } else if (cells[heartPosition].classList.contains('gun')) {
-  //     console.log('Comp won HEART HIT GUN')
-      
-  //   } else {
-  //     console.log('NOPE')      
-  //   }
-  //   //console.log('heeeeeelllllo')
-  // }
-
   function whoWon() {
     vamps.forEach((vamp) => {
       if (cells[vamp].classList.contains('grave')) {
-        console.log('Comp Won VAMPS HIT GRAVE') 
+        displayWhoWon.innerHTML = 'The Vampires whooped you'
       }
     }) 
+    
     if (cells[heartPosition].classList.contains('gun')) {
-      console.log('Comp won HEART HIT GUN')
+      displayWhoWon.innerHTML = 'Eww you got hit by a heart'
     } else if (vamps.length < 1) {
-      console.log('PLAYER won ALL VAMPS GONE')
+      displayWhoWon.innerHTML = 'Wahooo shoot them all'
     } else {
       console.log('player won')
     }        
