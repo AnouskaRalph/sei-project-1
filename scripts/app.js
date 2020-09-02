@@ -86,12 +86,15 @@ function init() {
   
   function addHearts() {  
     if (cells[heartPosition].classList.contains('grave')) {
-      // console.log('CONTAINS GRAVE 222')
+      // console.log('CONTAINS GRAVE 1.2')
       clearInterval(moveHeartTimer)
       removeHearts()
       graves.splice(graves.indexOf(heartPosition), 1)
       cells[heartPosition].classList.remove('grave')
-      
+      moveHeart()
+    } else if (cells[heartPosition].classList.contains('gun')) {
+      clearInterval(moveHeartTimer)
+      endGame() 
     } else {
       cells[heartPosition].classList.add('heart')
     }
@@ -113,18 +116,19 @@ function init() {
     addGun(startingPosition)
     addVamps(vampPosition)  
     addGraves(gravePosition)
+    
   }  
   
   function moveVamps() { 
+    whoWon
     moveHeart()
     moveVampsTimer = setInterval(() => {
       removeVamps()
-      //It doesn't work here
       vamps = vamps.map(vamp => {
         return vamp + 1
       })
       addVamps()
-    }, 200)
+    }, 1000)
   }
   
   function moveSword() {
@@ -160,12 +164,15 @@ function init() {
     removeVamps() 
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
-    if (cells[vampPosition].classList.contains('grave')) {
+  }
+  function whoWon() {
+    if (cells[vamp].classList.contains('grave')) {
       console.log('Comp Won')
     } else {
       console.log('player won')
     }
   }
+
 
   
   function handleKeyUp(event) {
