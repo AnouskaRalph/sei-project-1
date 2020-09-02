@@ -93,7 +93,7 @@ function init() {
       removeHearts()
       graves.splice(graves.indexOf(heartPosition), 1)
       cells[heartPosition].classList.remove('grave')
-      moveHeart()
+
       whoWon()
     } else if (cells[heartPosition].classList.contains('gun')) {
       clearInterval(moveHeartTimer)
@@ -157,9 +157,12 @@ function init() {
         removeHearts()
         heartPosition = heartPosition + 10 
         addHearts() 
-      }   
+      }  else {
+        cells[heartPosition].classList.remove('heart') 
+      }      
       //console.log('WORKING EVERY 1SECOND')
     }, 300)
+
   } 
 
   function scoreKeeping() {
