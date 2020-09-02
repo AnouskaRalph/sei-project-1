@@ -124,6 +124,7 @@ function init() {
   
   function moveVamps() { 
     moveHeart()
+    clearInterval(moveVampsTimer)
     moveVampsTimer = setInterval(() => {
       removeVamps()
       vamps = vamps.map(vamp => {
@@ -134,6 +135,7 @@ function init() {
   }
   
   function moveSword() {
+    clearInterval(moveSwordTimer)
     swordPosition = gunPosition
     moveSwordTimer = setInterval(() => {
       if (swordPosition >= 0) {
@@ -148,7 +150,8 @@ function init() {
     return Math.floor(Math.random() * vamps.length)
   }
   function moveHeart() {
-    heartPosition = getNewHeartPosition()
+    clearInterval(moveHeartTimer)
+    heartPosition = getNewHeartPosition()    
     moveHeartTimer = setInterval(() => {
       if (heartPosition <= 99) {
         removeHearts()
