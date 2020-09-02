@@ -40,7 +40,7 @@ function init() {
   function addSword() {
     if (cells[swordPosition].classList.contains('grave')) {
       clearInterval(moveSwordTimer)
-      removeSword()      
+      removeSword()       
       console.log('HIT GRAVE')
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
@@ -137,10 +137,12 @@ function init() {
   function moveSword() {
     swordPosition = gunPosition
     moveSwordTimer = setInterval(() => {
-      removeSword()
-      swordPosition = swordPosition - 10
-      addSword()      
-    }, 100)
+      if (swordPosition >= 0) {
+        removeSword()
+        swordPosition = swordPosition - 10
+        addSword()   
+      }         
+    }, 1000)
   }
   
   function getNewHeartPosition() {
@@ -175,7 +177,7 @@ function init() {
         displayWhoWon.innerHTML = 'The Vampires whooped you'
       }
     }) 
-    
+
     if (cells[heartPosition].classList.contains('gun')) {
       displayWhoWon.innerHTML = 'Eww you got hit by a heart'
     } else if (vamps.length < 1) {
