@@ -130,7 +130,7 @@ function init() {
         return vamp + 1
       })
       addVamps()
-    }, 200)
+    }, 500)
   }
   
   function moveSword() {
@@ -154,10 +154,9 @@ function init() {
         removeHearts()
         heartPosition = heartPosition + 10 
         addHearts() 
-      }
-      
+      }   
       //console.log('WORKING EVERY 1SECOND')
-    }, 200)
+    }, 300)
   } 
 
   function scoreKeeping() {
