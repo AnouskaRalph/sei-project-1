@@ -155,12 +155,12 @@ function init() {
     }
     scoreDisplay.textContent = score
   }
-  
+  // HERE ****************************
   function endGame() {
     removeVamps() 
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
-    if (cells[vamp].classList.contains('grave')) {
+    if (cells[vampPosition].classList.contains('grave')) {
       console.log('Comp Won')
     } else {
       console.log('player won')
