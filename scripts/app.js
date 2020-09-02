@@ -95,6 +95,7 @@ function init() {
       graves.splice(graves.indexOf(heartPosition), 1)
       cells[heartPosition].classList.remove('grave')
       moveHeart()
+      whoWon()
     } else if (cells[heartPosition].classList.contains('gun')) {
       clearInterval(moveHeartTimer)
       endGame() 
@@ -130,7 +131,7 @@ function init() {
         return vamp + 1
       })
       addVamps()
-    }, 1000)
+    }, 200)
   }
   
   function moveSword() {
@@ -161,37 +162,42 @@ function init() {
     }
     scoreDisplay.textContent = score
   }
-  // HERE ****************************
+
   function endGame() {
     removeVamps() 
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
   }
-  function whoWon() {
-    if (cells[vampPosition].classList.contains('grave')) {
-      console.log('Comp Won')
-    // else if (vamps.length < 1) {
-    //   console.log('Comp won')
-    } //this one works
-    else if (cells[heartPosition].classList.contains('gun')) {
-      console.log('Comp won')
-    } else {
-      console.log('player won')
-    }
-    //console.log('heeeeeelllllo')
-  }
 
   // function whoWon() {
-  //   vamps.forEach((vamp) => {
-  //     if (cells[vamp].classList.contains('grave')) {
-  //       console.log('Comp Won VAMPS HIT GRAVE') 
-  //     } else if (cells[heartPosition].classList.contains('gun')) {
-  //       console.log('Comp won HEART HIT GUN')
-  //     } else {
-  //       console.log('player won')
-  //     }     
-  //   })
-  // } 
+  //   if (cells[vamps].classList.contains('grave')) {
+  //     console.log('Comp Won VAMPS HIT GRAVES')
+  //     console.log(vamps)
+  //   // // else if (vamps.length < 1) {
+  //   // //   console.log('PLAYER won ALL VAMPS GONE')
+  //   } else if (cells[heartPosition].classList.contains('gun')) {
+  //     console.log('Comp won HEART HIT GUN')
+      
+  //   } else {
+  //     console.log('NOPE')      
+  //   }
+  //   //console.log('heeeeeelllllo')
+  // }
+
+  function whoWon() {
+    vamps.forEach((vamp) => {
+      if (cells[vamp].classList.contains('grave')) {
+        console.log('Comp Won VAMPS HIT GRAVE') 
+      }
+    }) 
+    if (cells[heartPosition].classList.contains('gun')) {
+      console.log('Comp won HEART HIT GUN')
+    } else if (vamps.length < 1) {
+      console.log('PLAYER won ALL VAMPS GONE')
+    } else {
+      console.log('player won')
+    }        
+  } 
   
   function handleKeyUp(event) {
     removeGun() 
