@@ -39,11 +39,13 @@ function init() {
     if (cells[swordPosition].classList.contains('grave')) {
       clearInterval(moveSwordTimer)
       removeSword()
+      whoWon()
       console.log('HIT GRAVE')
     } else if (cells[swordPosition].classList.contains('vamp')) {
       clearInterval(moveSwordTimer)
       removeSword()
       scoreKeeping()
+      whoWon()
       //console.log(vamps.length)
       vamps.splice(vamps.indexOf(swordPosition), 1)
       cells[swordPosition].classList.remove('vamp')
@@ -61,6 +63,7 @@ function init() {
     vamps.forEach((vamp) => {
       if (cells[vamp].classList.contains('grave')) {
         endGame()
+        whoWon()
       } else
         cells[vamp].classList.add('vamp')  
     })
@@ -95,6 +98,7 @@ function init() {
     } else if (cells[heartPosition].classList.contains('gun')) {
       clearInterval(moveHeartTimer)
       endGame() 
+      whoWon()
     } else {
       cells[heartPosition].classList.add('heart')
     }
@@ -115,12 +119,10 @@ function init() {
     }     
     addGun(startingPosition)
     addVamps(vampPosition)  
-    addGraves(gravePosition)
-    
+    addGraves(gravePosition)    
   }  
   
   function moveVamps() { 
-    whoWon
     moveHeart()
     moveVampsTimer = setInterval(() => {
       removeVamps()
@@ -150,7 +152,7 @@ function init() {
       heartPosition = heartPosition + 10 
       addHearts()
       //console.log('WORKING EVERY 1SECOND')
-    }, 1000)
+    }, 200)
   } 
 
   function scoreKeeping() {
@@ -166,14 +168,30 @@ function init() {
     gameOver.innerHTML = 'Game Over'
   }
   function whoWon() {
-    if (cells[vamp].classList.contains('grave')) {
+    if (cells[vampPosition].classList.contains('grave')) {
       console.log('Comp Won')
+    // else if (vamps.length < 1) {
+    //   console.log('Comp won')
+    } //this one works
+    else if (cells[heartPosition].classList.contains('gun')) {
+      console.log('Comp won')
     } else {
       console.log('player won')
     }
+    //console.log('heeeeeelllllo')
   }
 
-
+  // function whoWon() {
+  //   vamps.forEach((vamp) => {
+  //     if (cells[vamp].classList.contains('grave')) {
+  //       console.log('Comp Won VAMPS HIT GRAVE') 
+  //     } else if (cells[heartPosition].classList.contains('gun')) {
+  //       console.log('Comp won HEART HIT GUN')
+  //     } else {
+  //       console.log('player won')
+  //     }     
+  //   })
+  // } 
   
   function handleKeyUp(event) {
     removeGun() 
