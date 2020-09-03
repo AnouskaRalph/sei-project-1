@@ -135,14 +135,14 @@ function init() {
     console.log('starting positions', positions)
     return positions
   }
-  function removeLives() {
-    // if (cells[positions].classList.contains('gun')) {
-    //   lives -= 1
-    //   livesDisplay.textContent = lives 
-    // }
-    //  if (lives === 0) {
-    //   endGame()
-    // }  
+  function removeLives(heartLocation) {
+    if (cells[heartLocation].classList.contains('gun')) {
+      lives -= 1
+      livesDisplay.textContent = lives 
+    }
+    if (lives === 0) {
+      endGame()
+    }  
     console.log('working life taken')   
   }
 
@@ -150,15 +150,15 @@ function init() {
     const currentPosition = hearts[heartId].location
     cells[currentPosition].classList.remove('heart')
     const newPosition = currentPosition + 10
+    if (cells[newPosition].classList.contains('gun')){
+      return removeLives(newPosition)
+    }
     if (graves.includes(newPosition) || gunPosition === newPosition){
       clearInterval(hearts[heartId].timer)
-      console.log('heart end positon is', currentPosition)
-      removeLives()
       return delete hearts[heartId]
     }
     cells[newPosition].classList.add('heart')
     hearts[heartId].location = newPosition
-    if (newPosition === gunPosition) removeLives()
   }
 
 
