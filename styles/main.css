@@ -18,16 +18,10 @@ header {
   margin: 10px;
   flex-direction: row;
   justify-content: space-around;
-  
-    
+  color: white;
+  font-size: 14px;
 }
-h2 {
 
-  color: white;
-}
-h1 {
-  color: white;
-}
 
 button {
 

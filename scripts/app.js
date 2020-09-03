@@ -7,13 +7,11 @@ function init() {
   const displayWhoWon = document.querySelector('#who-won')
   const livesDisplay = document.querySelector('#lives-display')
 
-
-
   const cells = []
   const width = 10
   const cellCount = width * width
   const graves = [81, 83, 85, 87]
-
+  const hearts = {}
 
   let vamps = [1, 2, 3, 4, 5, 6, 7, 8,
     11, 12, 13, 14, 15, 16, 17, 18,
@@ -25,14 +23,8 @@ function init() {
   let vampPosition
   let gravePosition
   let swordPosition
-  let heartPosition
-  let currentLives
-
   let moveVampsTimer
   let moveSwordTimer
-  let moveHeartTimer
-
-  const hearts = {}
 
   function addGun(position) {
     cells[position].classList.add('gun')
@@ -63,10 +55,8 @@ function init() {
     vamps.forEach((vamp) => {
       if (cells[vamp].classList.contains('grave')) {
         endGame()
-        whoWon()
-      } else if (cells[vamp].classList.contains('gun')) {
+      } if (cells[vamp].classList.contains('gun')) {
         endGame()
-        whoWon()
       } else
         cells[vamp].classList.add('vamp')
     })
@@ -83,17 +73,6 @@ function init() {
       cells[grave].classList.add('grave')
     })
   }
-  // function addGraves() {
-  //   graves.forEach((grave) => {
-  //     if (cells[hearts[heartId].location].classList.contains('grave')) {
-  //       console.log('GRAVE')
-  //     } else {
-  //       cells[grave].classList.add('grave')
-  //     }      
-  //   })
-  // }
-
-
   function removeGraves() {
     graves.forEach((grave) => {
       cells[grave].classList.remove('grave')
@@ -121,7 +100,7 @@ function init() {
         return vamp + 1
       })
       addVamps()
-    }, 3000)
+    }, 1000)
   }
 
   function moveSword() {
@@ -136,49 +115,10 @@ function init() {
     }, 200)
   }
 
-
   function getNewHeartPosition() {
     const positions = vamps[(Math.floor(Math.random() * vamps.length))]
-
     return positions
   }
-
-  function removeLives(heartLocation) {
-    if (cells[heartLocation].classList.contains('gun') && lives > 0) {
-      lives -= 1
-      livesDisplay.textContent = lives
-    } else  {
-      endGame()
-    }
-  }
-
-  function moveHearts(heartId) {
-    const currentPosition = hearts[heartId].location
-    cells[currentPosition].classList.remove('heart')
-    // console.log(currentPosition)
-    const newPosition = currentPosition + 10
-    console.log(cells[newPosition].classList)
-    if (cells[newPosition].classList.contains('grave')) {
-      cells[newPosition].classList.remove('grave')
-      graves.splice(graves.indexOf(newPosition), 1)
-      console.log(graves)
-    }
-    if (cells[newPosition].classList.contains('gun')) {
-      console.log('FIRST IF')
-      return removeLives(newPosition)
-    }
-    if  (cells[newPosition].classList.contains('grave')) {
-      console.log('WORKINGGGG')
-      clearInterval(hearts[heartId].timer)      
-      return delete hearts[heartId]
-    }
-    cells[newPosition].classList.add('heart')
-    hearts[heartId].location = newPosition
-  }
-  //((graves.includes(newPosition) || gunPosition === newPosition))
-
-
-
   function startHearts() {
     const heartId = Math.random() * Math.random() * 100
     const startingPosition = getNewHeartPosition()
@@ -186,6 +126,34 @@ function init() {
     hearts[heartId] = {}
     hearts[heartId].location = startingPosition
     hearts[heartId].timer = setInterval(() => moveHearts(heartId), 1000)
+  }
+  function moveHearts(heartId) {
+    const currentPosition = hearts[heartId].location
+    // console.log(cells[currentPosition])
+    cells[currentPosition].classList.remove('heart')
+    // console.log(currentPosition)
+    const newPosition = currentPosition + 10
+    if (cells[newPosition].classList.contains('grave')) {
+      cells[newPosition].classList.remove('grave')
+      graves.splice(graves.indexOf(newPosition), 1)
+      // console.log(graves)
+      clearInterval(hearts[heartId].timer)
+      // once this is all done, delete the heart
+      return delete hearts[heartId]
+    }
+    if (cells[newPosition].classList.contains('gun')) {
+      console.log('FIRST IF')
+      removeLives(newPosition)
+      clearInterval(hearts[heartId].timer)
+      return delete hearts[heartId]
+    }
+    if (cells[newPosition].classList.contains('sword')) {
+      cells[newPosition].classList.remove('sword')
+      clearInterval(hearts[heartId].timer)
+      return delete hearts[heartId]
+    }
+    cells[newPosition].classList.add('heart')
+    hearts[heartId].location = newPosition
   }
 
   function scoreKeeping() {
@@ -195,28 +163,53 @@ function init() {
     scoreDisplay.textContent = score
   }
 
+  function removeLives(heartLocation) {
+    if (cells[heartLocation].classList.contains('gun') && lives > 0) {
+      lives -= 1
+      livesDisplay.textContent = lives
+    } else {
+      endGame()
+    }
+  }
+
   function endGame() {
     removeVamps()
     removeGraves()
+    whoWon()
     clearInterval(moveVampsTimer)
+    clearInterval(hearts[heartId].timer)
     gameOver.innerHTML = 'Game Over'
   }
 
-
   function whoWon() {
-    vamps.forEach((vamp) => {
-      if ((cells[vamp].classList.contains('grave')) || (cells[vamp].classList.contains('gun'))) {
-        displayWhoWon.innerHTML = 'The Vampires whooped you'
-      }
-    })
-    if (cells[heartPosition].classList.contains('gun')) {
-      displayWhoWon.innerHTML = 'Eww you got hit by a heart'
-    } else if (vamps.length < 1) {
+    if ((cells[vamps].classList.contains('grave')) || cells[vamps].classList.contains('gun')) {
+      displayWhoWon.innerHTML = 'The Vampires whooped you'
+      endGame()
+    }
+    if (vamps.length <= 0) {
+      console.log('I AM HERE')
       displayWhoWon.innerHTML = 'Wahooo shoot them all'
+      endGame()
     } else {
-      console.log('player won')
+      console.log('Something went wrong')
     }
   }
+
+  // function whoWon() {
+  //   vamps.forEach((vamp) => {
+  //     if ((cells[vamp].classList.contains('grave')) || (cells[vamp].classList.contains('gun'))) {
+  //       displayWhoWon.innerHTML = 'The Vampires whooped you'
+  //       endGame()
+  //     }
+  //     if (vamps.length <= 0) {
+  //       console.log('I AM HERE')
+  //       displayWhoWon.innerHTML = 'Wahooo shoot them all'
+  //       endGame()
+  //     } else {
+  //       console.log('Something went wrong')
+  //     }
+  //   })
+  // }
 
   function handleKeyUp(event) {
     removeGun()
@@ -240,7 +233,6 @@ function init() {
 
   createGrid(gunPosition, vampPosition, gravePosition)
   startButton.addEventListener('click', moveVamps)
-  // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
 
 
