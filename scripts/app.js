@@ -128,8 +128,7 @@ function init() {
     addGraves(gravePosition)   
   }  
   
-  function moveVamps() { 
-    
+  function moveVamps() {     
     clearInterval(moveVampsTimer)
     moveVampsTimer = setInterval(() => {
       removeVamps()
@@ -137,7 +136,7 @@ function init() {
         return vamp + 1
       })
       addVamps()
-      heartTimer = setInterval(moveHearts, 2000)
+      heartTimer = setInterval(moveHeart, 2000)
     }, 500)
   }
   
@@ -153,8 +152,6 @@ function init() {
     }, 200)
   }
   
-
-
 
 
 
@@ -189,14 +186,7 @@ function init() {
     }  else {
       cells[heartPosition].classList.remove('heart') 
     }      
-  } 
-
-
-
-
-
-
-
+  }
 
 
   function scoreKeeping() {
