@@ -8,10 +8,12 @@ function init() {
   const livesDisplay = document.querySelector('#lives-display')
   
   
+  
   const cells = []
   const width = 10
   const cellCount = width * width
   const graves = [81, 83, 85, 87]
+
   
   let vamps = [ 1, 2, 3, 4, 5, 6, 7, 8, 
     11, 12, 13, 14, 15, 16, 17, 18,
@@ -23,11 +25,13 @@ function init() {
   let vampPosition
   let gravePosition
   let swordPosition
-  let heartPosition  
+  let heartPosition 
+
   let moveVampsTimer
   let moveSwordTimer
   let moveHeartTimer
-  
+
+  const hearts = {}
   
   function addGun(position) {
     cells[position].classList.add('gun')
@@ -37,14 +41,7 @@ function init() {
     cells[gunPosition].classList.remove('gun')
   } 
 
-  function removeLives() {
-    if (cells[heartPosition].classList.contains('gun')) {
-      lives -= 1
-      livesDisplay.textContent = lives 
-    } if (lives === 0) {
-      endame()
-    }       
-  }   
+
   
   function addSword() {
     if (cells[swordPosition].classList.contains('grave')) {
@@ -94,28 +91,7 @@ function init() {
     graves.forEach((grave) => {
       cells[grave].classList.remove('grave')
     })
-  }
-  
-  function addHearts() {  
-    if (cells[heartPosition].classList.contains('grave')) {
-      clearInterval(moveHeartTimer)
-      removeHearts()
-      graves.splice(graves.indexOf(heartPosition), 1)
-      cells[heartPosition].classList.remove('grave')
-      whoWon()
-    } else if (cells[heartPosition].classList.contains('gun')) {
-      clearInterval(moveHeartTimer)
-      removeLives()
-      // endGame() 
-      // whoWon()
-    } else {
-      cells[heartPosition].classList.add('heart')
-    }
-  } 
-  
-  function removeHearts() {
-    cells[heartPosition].classList.remove('heart')
-  }
+  }  
   
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
@@ -129,14 +105,15 @@ function init() {
   }  
   
   function moveVamps() {     
+    setInterval(() => startHearts(), 4000)
     clearInterval(moveVampsTimer)
+
     moveVampsTimer = setInterval(() => {
       removeVamps()
       vamps = vamps.map(vamp => {
         return vamp + 1
       })
       addVamps()
-      heartTimer = setInterval(moveHeart, 2000)
     }, 500)
   }
   
@@ -153,40 +130,47 @@ function init() {
   }
   
 
-
-
-
-  // function getNewHeartPosition() {
-  //   return Math.floor(Math.random() * vamps.length)
-  // }
-  // function moveHeart() {
-  //   clearInterval(moveHeartTimer)
-  //   heartPosition = getNewHeartPosition()    
-  //   moveHeartTimer = setInterval(() => {
-  //     if (heartPosition <= 99) {
-  //       removeHearts()
-  //       heartPosition = heartPosition + 10 
-  //       addHearts() 
-  //     }  else {
-  //       cells[heartPosition].classList.remove('heart') 
-  //     }    
-  //   }, 300)
-  // } 
-
   function getNewHeartPosition() {
-    return Math.floor(Math.random() * vamps.length)
+    const positions = vamps[(Math.floor(Math.random() * vamps.length))]
+    console.log('starting positions', positions)
+    return positions
   }
-  function moveHeart() {
-    clearInterval(moveHeartTimer)
-    heartPosition = getNewHeartPosition()       
-    if (heartPosition <= 99) {
-      removeHearts()
-      heartPosition = heartPosition + 10 
-      addHearts() 
-    }  else {
-      cells[heartPosition].classList.remove('heart') 
-    }      
+  function removeLives() {
+    // if (cells[positions].classList.contains('gun')) {
+    //   lives -= 1
+    //   livesDisplay.textContent = lives 
+    // }
+    //  if (lives === 0) {
+    //   endGame()
+    // }  
+    console.log('working life taken')   
   }
+
+  function moveHearts(heartId) {
+    const currentPosition = hearts[heartId].location
+    cells[currentPosition].classList.remove('heart')
+    const newPosition = currentPosition + 10
+    if (graves.includes(newPosition) || gunPosition === newPosition){
+      clearInterval(hearts[heartId].timer)
+      console.log('heart end positon is', currentPosition)
+      removeLives()
+      return delete hearts[heartId]
+    }
+    cells[newPosition].classList.add('heart')
+    hearts[heartId].location = newPosition
+    if (newPosition === gunPosition) removeLives()
+  }
+
+
+  function startHearts() {
+    const heartId = Math.random() * Math.random() * 100
+    const startingPosition = getNewHeartPosition()
+    cells[startingPosition].classList.add('heart')
+    hearts[heartId] = {}
+    hearts[heartId].location = startingPosition
+    hearts[heartId].timer = setInterval(() => moveHearts(heartId), 1000)
+  }
+
 
 
   function scoreKeeping() {
@@ -211,6 +195,7 @@ function init() {
 
     if (cells[heartPosition].classList.contains('gun')) {
       displayWhoWon.innerHTML = 'Eww you got hit by a heart'
+      
     } else if (vamps.length < 1) {
       displayWhoWon.innerHTML = 'Wahooo shoot them all'
     } else {
@@ -248,7 +233,26 @@ function init() {
 
 
 
-
+  // function addHearts() {  
+  //   if (cells[heartPosition].classList.contains('grave')) {
+  //     clearInterval(moveHeartTimer)
+  //     removeHearts()
+  //     graves.splice(graves.indexOf(heartPosition), 1)
+  //     cells[heartPosition].classList.remove('grave')
+  //     whoWon()
+  //   } else if (cells[heartPosition].classList.contains('gun')) {
+  //     clearInterval(moveHeartTimer)
+  //     removeLives()
+  //     // endGame() 
+  //     // whoWon()
+  //   } else {
+  //     cells[heartPosition].classList.add('heart')
+  //   }
+  // } 
+  
+  // function removeHearts() {
+  //   cells[heartPosition].classList.remove('heart')
+  // }
 
 
 
