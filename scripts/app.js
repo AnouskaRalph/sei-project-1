@@ -10,6 +10,7 @@ function init() {
   const cellCount = width * width
   const graves = [81, 83, 85, 87]
   const hearts = {}
+
   let vamps = [1, 2, 3, 4, 5, 6, 7, 8,
     11, 12, 13, 14, 15, 16, 17, 18,
     21, 22, 23, 24, 25, 26, 27, 28, 28]
@@ -23,6 +24,7 @@ function init() {
   let moveVampsTimer
   let moveSwordTimer
   let startAllHearts
+
   function addGun(position) {
     cells[position].classList.add('gun')
   }
@@ -48,6 +50,10 @@ function init() {
   }
   function addVamps() {
     vamps.forEach((vamp) => {
+      if (vamps.length === 1) {
+        displayWhoWon.innerHTML = 'Wahooo dusted them all'
+        return endGame()
+      }
       if (cells[vamp].classList.contains('grave')) {
         whoWon()
         endGame()
@@ -83,6 +89,7 @@ function init() {
     addVamps(vampPosition)
     addGraves(gravePosition)
   }
+
   function moveVamps() {
     startAllHearts = setInterval(() => startHearts(), 4000)
     clearInterval(moveVampsTimer)
@@ -94,6 +101,8 @@ function init() {
       addVamps()
     }, 1000)
   }
+
+
   function moveSword() {
     clearInterval(moveSwordTimer)
     swordPosition = gunPosition
@@ -106,6 +115,8 @@ function init() {
       }
     }, 200)
   }
+
+
   function getNewHeartPosition() {
     const positions = vamps[(Math.floor(Math.random() * vamps.length))]
     return positions
@@ -118,6 +129,9 @@ function init() {
     hearts[heartId].location = startingPosition
     hearts[heartId].timer = setInterval(() => moveHearts(heartId), 1000)
   }
+
+
+
   function moveHearts(heartId) {
     const currentPosition = hearts[heartId].location
     // console.log(cells[currentPosition])
@@ -145,6 +159,8 @@ function init() {
     cells[newPosition].classList.add('heart')
     hearts[heartId].location = newPosition
   }
+
+
   function scoreKeeping() {
     if (cells[swordPosition].classList.contains('vamp')) {
       score += 10
@@ -152,7 +168,7 @@ function init() {
     scoreDisplay.textContent = score
   }
   function removeLives(heartLocation) {
-    if (cells[heartLocation].classList.contains('gun') && lives > 1) {
+    if (cells[heartLocation].classList.contains('gun') && lives > 0) {
       lives -= 1
       livesDisplay.textContent = lives
     } else {
@@ -160,16 +176,17 @@ function init() {
     }
   }
   function endGame() {
-    console.log('hearts', Object.values(hearts)) // * the object.values method gives us an array of key value pairs from the hearts obejct
+    //console.log('hearts', Object.values(hearts)) // * the object.values method gives us an array of key value pairs from the hearts obejct
     Object.values(hearts).map(heart => clearInterval(heart.timer)) // * loop through our new array of key value pairs from the object and clear all individual heart timers
     clearInterval(startAllHearts) // * clear the timer that starts the hearts, I defined this startAllHearts timer globally and reassigned it inside moveVamps when starting the timer
-    cells.forEach(cell => cell.classList.remove('heart') )
+    cells.forEach(cell => cell.classList.remove('heart'))
     removeVamps()
     removeGraves()
     whoWon()
     clearInterval(moveVampsTimer)
     gameOver.innerHTML = 'Game Over'
   }
+
   function whoWon() {
     vamps.forEach((vamp) => {
       if ((cells[vamp].classList.contains('grave')) || (cells[vamp].classList.contains('gun'))) {
@@ -178,14 +195,14 @@ function init() {
         console.log(vamps.length)
       }
     })
-    if (vamps.length === 0) {
-      console.log('I AM HERE')
-      displayWhoWon.innerHTML = 'Wahooo shoot them all'
+    if (vamps.length === 1) {
+      displayWhoWon.innerHTML = 'Wahooo dusted them all'
       endGame()
     } else {
       console.log('Something went wrong')
     }
   }
+
   function handleKeyUp(event) {
     removeGun()
     const x = gunPosition % width
@@ -204,9 +221,18 @@ function init() {
     }
     addGun(gunPosition)
   }
+
   createGrid(gunPosition, vampPosition, gravePosition)
   startButton.addEventListener('click', moveVamps)
   // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
+
+
+
+
+
+
+
+
 }
 window.addEventListener('DOMContentLoaded', init)
