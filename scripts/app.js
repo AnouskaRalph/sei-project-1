@@ -1,6 +1,7 @@
 function init() {
   const grid = document.querySelector('.grid')
   const startButton = document.querySelector('.button')
+  const refreshButton = document.querySelector('.refresh-button')
   const gameOver = document.querySelector('#game-over')
   const scoreDisplay = document.querySelector('#score-display')
   const displayWhoWon = document.querySelector('#who-won')
@@ -102,7 +103,6 @@ function init() {
     }, 1000)
   }
 
-
   function moveSword() {
     clearInterval(moveSwordTimer)
     swordPosition = gunPosition
@@ -151,7 +151,6 @@ function init() {
       return delete hearts[heartId]
     }
     if (cells[currentPosition].classList.contains('sword')) {
-      console.log('sword hit heart')
       cells[newPosition].classList.remove('sword')
       clearInterval(hearts[heartId].timer)
       return delete hearts[heartId]
@@ -175,6 +174,10 @@ function init() {
       endGame()
     }
   }
+  function refreshPage() {
+    window.location.reload
+  }
+
   function endGame() {
     //console.log('hearts', Object.values(hearts)) // * the object.values method gives us an array of key value pairs from the hearts obejct
     Object.values(hearts).map(heart => clearInterval(heart.timer)) // * loop through our new array of key value pairs from the object and clear all individual heart timers
@@ -223,8 +226,9 @@ function init() {
   }
 
   createGrid(gunPosition, vampPosition, gravePosition)
+
+  refreshButton.addEventListener('click', refreshPage)
   startButton.addEventListener('click', moveVamps)
-  // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
 
 
