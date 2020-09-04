@@ -23,6 +23,7 @@ function init() {
   let vampPosition
   let gravePosition
   let swordPosition
+  let heartPosition
   let moveVampsTimer
   let moveSwordTimer
 
@@ -54,8 +55,10 @@ function init() {
   function addVamps() {
     vamps.forEach((vamp) => {
       if (cells[vamp].classList.contains('grave')) {
+        whoWon()
         endGame()
       } if (cells[vamp].classList.contains('gun')) {
+        whoWon()
         endGame()
       } else
         cells[vamp].classList.add('vamp')
@@ -93,7 +96,6 @@ function init() {
   function moveVamps() {
     setInterval(() => startHearts(), 4000)
     clearInterval(moveVampsTimer)
-
     moveVampsTimer = setInterval(() => {
       removeVamps()
       vamps = vamps.map(vamp => {
@@ -110,6 +112,7 @@ function init() {
       if (swordPosition >= 0) {
         removeSword()
         swordPosition = swordPosition - 10
+        console.log('vamps left', vamps.length)
         addSword()
       }
     }, 200)
@@ -136,18 +139,17 @@ function init() {
     if (cells[newPosition].classList.contains('grave')) {
       cells[newPosition].classList.remove('grave')
       graves.splice(graves.indexOf(newPosition), 1)
-      // console.log(graves)
       clearInterval(hearts[heartId].timer)
       // once this is all done, delete the heart
       return delete hearts[heartId]
     }
     if (cells[newPosition].classList.contains('gun')) {
-      console.log('FIRST IF')
       removeLives(newPosition)
       clearInterval(hearts[heartId].timer)
       return delete hearts[heartId]
     }
-    if (cells[newPosition].classList.contains('sword')) {
+    if (cells[currentPosition].classList.contains('sword')) {
+      console.log('sword hit heart')
       cells[newPosition].classList.remove('sword')
       clearInterval(hearts[heartId].timer)
       return delete hearts[heartId]
@@ -164,7 +166,7 @@ function init() {
   }
 
   function removeLives(heartLocation) {
-    if (cells[heartLocation].classList.contains('gun') && lives > 0) {
+    if (cells[heartLocation].classList.contains('gun') && lives > 1) {
       lives -= 1
       livesDisplay.textContent = lives
     } else {
@@ -177,16 +179,18 @@ function init() {
     removeGraves()
     whoWon()
     clearInterval(moveVampsTimer)
-    clearInterval(hearts[heartId].timer)
     gameOver.innerHTML = 'Game Over'
   }
 
   function whoWon() {
-    if ((cells[vamps].classList.contains('grave')) || cells[vamps].classList.contains('gun')) {
-      displayWhoWon.innerHTML = 'The Vampires whooped you'
-      endGame()
-    }
-    if (vamps.length <= 0) {
+    vamps.forEach((vamp) => {
+      if ((cells[vamp].classList.contains('grave')) || (cells[vamp].classList.contains('gun'))) {
+        displayWhoWon.innerHTML = 'The Vampires whooped you'
+        endGame()
+        console.log(vamps.length)
+      }
+    })
+    if (vamps.length === 0) {
       console.log('I AM HERE')
       displayWhoWon.innerHTML = 'Wahooo shoot them all'
       endGame()
@@ -195,21 +199,6 @@ function init() {
     }
   }
 
-  // function whoWon() {
-  //   vamps.forEach((vamp) => {
-  //     if ((cells[vamp].classList.contains('grave')) || (cells[vamp].classList.contains('gun'))) {
-  //       displayWhoWon.innerHTML = 'The Vampires whooped you'
-  //       endGame()
-  //     }
-  //     if (vamps.length <= 0) {
-  //       console.log('I AM HERE')
-  //       displayWhoWon.innerHTML = 'Wahooo shoot them all'
-  //       endGame()
-  //     } else {
-  //       console.log('Something went wrong')
-  //     }
-  //   })
-  // }
 
   function handleKeyUp(event) {
     removeGun()
@@ -233,6 +222,7 @@ function init() {
 
   createGrid(gunPosition, vampPosition, gravePosition)
   startButton.addEventListener('click', moveVamps)
+  // startButton.addEventListener('hoover', )
   document.addEventListener('keyup', handleKeyUp)
 
 
