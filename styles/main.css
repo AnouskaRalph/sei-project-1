@@ -28,7 +28,11 @@ button {
   margin: 20px;
   color: #33f293;
   background-color: black;
-
+}
+refresh-button {
+  margin: 20px;
+  color: #33f293;
+  background-color: black;
 }
 
 .grid-wrapper {
