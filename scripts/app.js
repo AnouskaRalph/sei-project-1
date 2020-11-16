@@ -21,7 +21,6 @@ function init() {
   let vampPosition
   let gravePosition
   let swordPosition
-  let heartPosition
   let moveVampsTimer
   let moveSwordTimer
   let startAllHearts
