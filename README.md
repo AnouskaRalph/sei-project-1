@@ -2,7 +2,7 @@
 
 ### Goal and timeframe 
 
-- To build a functioning browser game wih pure Javascript in 8 days. 
+- To build a functioning browser game wih pure JavaScript in 8 days. 
 
 #### Game Overview
 
