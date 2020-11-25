@@ -8,6 +8,8 @@
 
 During lockdown I found myself rewatching all the classics - Buffy was top of the list. This is a Space Invaders inspired game with a Buffy twist. The aim is to shoot or 'dust' as many vampires as possile whilst dodging the hearts that are randomly being thrown. In order to win the player must dust all the vampires before they reach the bottom on the grid. The player has three lives for every heart that hits the player a life is lost. The player can dodge the hearts by hiding behind a graves but once the graves are hit by the hearts they disappear making it more challenging for the player to dodge them. 
 
+![Wireframe Screenshot](assets/project-one.png)
+
 ### Technologies Used
 
 - HTML
