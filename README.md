@@ -1,5 +1,7 @@
 # Space Invaders - GA Project One
 
+### Game Link - https://anouskaralph.github.io/sei-project-1/
+
 ### Goal and timeframe 
 
 - To build a functioning browser game wih pure JavaScript in 8 days. 
