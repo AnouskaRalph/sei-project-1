@@ -74,9 +74,17 @@ function moveHearts(heartId) {
  - Collision logic.
  - Ensuring the timers were working properly.
 
-### Reflection 
+### Reflection & Key Learnings 
 
-Selecting a Space Invaders type of game seemed like the logical option for me; this game allowed me to work on my array methods, objects and DOM manipulation. Working with setTimers is challenge due to the buggy nature of having many being used at once. 
+Selecting a Space Invaders type of game seemed like the logical option for me as it this game allowed me to work on my JavaScript basics: array manipulation, methods, objects. Working with setTimers is challenge due to the buggy nature of having many being used at once. 
+
+- Writing functions in vanilla JavaScript.
+- The importance of planning, creating wireframes and writing pseudocode
+
+### Known Bugs & Future Features 
+- The timers go a bit awry and send hearts out twice the spead than they are set to. 
+- Graves break down instead of disappearing after one hit 
+
 
 
 
