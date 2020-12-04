@@ -15,7 +15,7 @@ body {
 header {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  margin: 40px;
   flex-direction: row;
   justify-content: space-around;
   color: white;
@@ -49,7 +49,7 @@ refresh-button {
   height: 100%;
   justify-content: center;
   height: 500px;
-  width: 600px;
+  width: 800px;
   
 }
 
@@ -61,31 +61,31 @@ refresh-button {
 }
 
 .grid div.gun {
-  background-image: url('../assets/gun1top.png');
+  background-image: url('../assets/gun3.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .grid div.vamp {
-  background-image: url('../assets/vampire.png');
+  background-image: url('../assets/alien3.jpg');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .grid div.grave {
-  background-image: url('../assets/large_headstone.png');
+  background-image: url('../assets/shield.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .grid div.sword {
-  background-image: url('../assets/espada_foda.png');
+  background-image: url('../assets/laser-beam.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .grid div.heart {
-  background-image: url('../assets/sprite_0.png');
+  background-image: url('../assets/alien-laser.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;

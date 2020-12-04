@@ -53,8 +53,7 @@ function init() {
       if (vamps.length === 1) {
         displayWhoWon.innerHTML = 'Wahooo dusted them all'
         return endGame()
-      }
-      if (cells[vamp].classList.contains('grave')) {
+      } if (cells[vamp].classList.contains('grave')) {
         whoWon()
         endGame()
       } if (cells[vamp].classList.contains('gun')) {
